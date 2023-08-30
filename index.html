@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>倒计时</title>
+		<style type="text/css">
+		/* 通用样式 */
+		*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		}
+		ol,ul{
+		list-style-type: none;
+		}
+		a{
+		text-decoration: none;
+		}
+		/* 页面样式 */
+		body{
+		background-color: black;
+		}
+		/* tm样式 */
+		.tm{
+		width: 350px;
+		height: 120px;
+		background-color: white;
+		margin: 100px auto;
+		text-align: center;
+		padding-top: 10px;
+		}
+		.tm h3{
+		margin-bottom: 10px;
+		color: red;
+		}
+		.tm>span:nth-child(2n){
+		display: inline-block;
+		width: 60px;
+		height: 60px;
+		background-color: black;
+		color: white;
+		line-height: 60px;
+		font-size: 24px
+		}
+		.tm>span:nth-child(2n-1){
+		display: inline-block;
+		width: 20px;
+		height: 60px;
+		font-weight: 700;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="tm">
+		<h3>距离今天晚上24点，还有</h3>
+		<span>时</span>
+		<span>:</span>
+		<span>分</span>
+		<span>:</span>
+		<span>秒</span>
+		</div>
+		<script type="text/javascript">
+		window.onload = function(){
+		var sps =
+		document.querySelectorAll(".tm>span")
+		getTM()
+		function getTM(){
+		var dt = new Date()
+		var h = dt.getHours()
+		var m = dt.getMinutes()
+		var s = dt.getSeconds()
+		var t = 24*60*60 - (h*60*60 + m*60 + s)
+		h = parseInt(t / 60 / 60)
+		m = parseInt((t - h*60*60)/60)
+		s = t % 60
+		h = h >= 10 ? h : "0" + h
+		m = m >= 10 ? m : "0" + m
+		s = s >= 10 ? s : "0" + s
+		sps[0].innerHTML = h
+		sps[2].innerHTML = m
+		sps[4].innerHTML = s
+		}
+		setInterval(function(){
+		getTM()
+		},1000)
+		}
+		</script>
+	</body>
+</html>
